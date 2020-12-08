@@ -1,6 +1,8 @@
 .footer {
+  display: block;
   max-width: 882px;
-  margin:0 auto 60px auto;
+  margin:0 auto 0 auto;
+  background-color: black;
 }
 
 @media all and (max-width: 945px) {

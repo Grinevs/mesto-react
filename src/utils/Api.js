@@ -1,6 +1,6 @@
 
 
-class Api {
+class Api { // поечему то не обновилось имя файла
   constructor(config)  {
     this._url = config.url;
     this._headers = config.headers;

@@ -24,7 +24,7 @@ function Main(props) {
       .catch((err) => {
         console.log("Ошибка. Запрос не выполнен: ", err);
       });
-  });
+  }, []);
 
   React.useEffect(() => {
     api

@@ -4,53 +4,17 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
-import { api } from "../utils/Api.js";
+
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isImgPopupOpen, setImgPopupOpen] = React.useState(false);
-  const [ownerId, setownerId] = React.useState("");
-
-  const [userName, setUserName] = React.useState("Жак-Ив Кусто");
-  const [userDescription, setUserDescription] = React.useState(
-    "Исследователь океана"
-  );
-  const [userAvatar, setUserAvatar] = React.useState("");
-  const [cards, setCards] = React.useState([]);
-  const [selectedCard, setselectedCard]=React.useState();
- 
-
-  React.useEffect(() => {
-    api
-      .getUserProfile()
-      .then((getUser) => {
-        setUserName(getUser.name);
-        setUserDescription(getUser.about);
-        setUserAvatar(getUser.avatar);
-        setownerId(getUser._id);
-      })
-      .catch((err) => {
-        console.log("Ошибка. Запрос не выполнен: ", err);
-      });
-  });
-
-  React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((cardsInit) => {
-        setCards(cardsInit);
-      })
-      .catch((err) => {
-        console.log("Ошибка. Запрос не выполнен: ", err);
-      });
-  }, []);
-
-  // console.log(cards)
+  const [selectedCard, setSelectedCard]=React.useState();
 
   function handleCardClick(card) {
-    setselectedCard(card)
+    setSelectedCard(card)
     handleImgClick();
   }
 
@@ -85,16 +49,10 @@ function App() {
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
-        userName={userName}
-        userDescription={userDescription}
-        userAvatar={userAvatar}
-        cards={cards}
-        ownerId={ownerId}
         onImgClick={handleCardClick}
       />
       <Footer />
       <PopupWithForm
-        key='1'
         title="Редактировать профиль"
         name="popup_profile"
         isOpen={isEditProfilePopupOpen}
@@ -130,7 +88,6 @@ function App() {
         </button>
       </PopupWithForm>
       <PopupWithForm
-        key='2'
         title="Новое место"
         name="popup_card"
         isOpen={isAddPlacePopupOpen}
@@ -161,7 +118,6 @@ function App() {
         </button>
       </PopupWithForm>
       <PopupWithForm
-        key='3'
         title="Обновить аватар"
         name="popup_avatar"
         isOpen={isEditAvatarPopupOpen}
@@ -181,7 +137,6 @@ function App() {
         </button>
       </PopupWithForm>
       <PopupWithForm
-        key='4'
         title="Вы уверены?"
         name="popup_delete"
         onClose={closeAllPopups}
@@ -192,16 +147,6 @@ function App() {
       </PopupWithForm>
       <ImagePopup card={selectedCard} isOpen={isImgPopupOpen} onClose={closeAllPopups}></ImagePopup>
 
-      <div className="popup popup_photo">
-        <div className="popup__container popup_photo__container">
-          <img className="popup_photo__pic" alt="#" src="#" />
-          <h3 className="popup__title popup_photo__title" />
-        </div>
-        <button
-          type="button"
-          className="popup__close-icon popup_photo__close-icon"
-        />
-      </div>
     </div>
   );
 }

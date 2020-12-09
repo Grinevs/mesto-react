@@ -1,5 +1,5 @@
 export default function Cards(props) {
-  // надо деструктуризировать?
+
   function handleClick() {
     props.onImgClick(props.card);
   }  
@@ -11,7 +11,7 @@ export default function Cards(props) {
       <img
         className="element__img"
         src={props.card.link}
-        alt={props.card.alt ? props.card.alt : "нет описания"}
+        alt={props.card.alt ? props.card.alt : props.card.name}
         onClick={handleClick}
       />
       <h3 className="element__title">{props.card.name}</h3>

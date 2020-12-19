@@ -11,7 +11,7 @@ function Main(props) {
         <div className="profile__overlay">
           <img
             src={(currentUser) ? currentUser.avatar : ''} 
-            alt="Портрет Жак-Ив Кусто в красной шапке на фоне моря"
+            alt="аватар"
             className="profile__avatar"
             onClick={props.onEditAvatar}
           />

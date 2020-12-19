@@ -95,19 +95,22 @@ function App() {
   function handleUpdateAvatar(data) {
     api.editUserAvatar(data)
   .then(() => {
+    data.name = currentUser.name;
+    data.about = currentUser.about;
     setCurrentUser(data)
     closeAllPopups()
+    
   })
-  .then(()=>{
-    api
-    .getUserProfile()
-    .then((getUser) => {
-      setCurrentUser(getUser);
-    })
-    .catch((err) => {
-      console.log("Ошибка. Запрос не выполнен: ", err);
-    });
-  })
+  // .then(()=>{
+  //   api
+  //   .getUserProfile()
+  //   .then((getUser) => {
+  //     setCurrentUser(getUser);
+  //   })
+  //   .catch((err) => {
+  //     console.log("Ошибка. Запрос не выполнен: ", err);
+  //   });
+  // })
   .catch((err) => {
     console.log('Ошибка. Запрос не выполнен: ', err);
   }); 
@@ -138,10 +141,9 @@ function App() {
   }
 
   function handleAddPlaceSubmit(newCard) {
-    
     api.addNewCard(newCard)
-      .then(() => {
-        setCards([newCard, ...cards]); 
+      .then((data) => {
+        setCards([data, ...cards]); 
       })
       .then(() => {
         closeAllPopups()

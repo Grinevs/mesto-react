@@ -1,26 +1,24 @@
-import React from "react";
-import {CurrentUserContext } from '../contexts/CurrentUserContext';
+import React from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function Cards(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  
- 
+
   function handleClick() {
     props.onImgClick(props.card);
-  }  
-  
-  const isLiked = (props.card.likes) ? props.card.likes.some(i => i._id === currentUser._id) : false;
+  }
+
+  // eslint-disable-next-line max-len
+  const isLiked = (props.card.likes) ? props.card.likes.some((i) => i._id === currentUser._id) : false;
   const isOwn = (props.card.owner) ? props.card.owner._id === currentUser._id : false;
-  
 
   function handleLikeClick() {
-    props.onCardLike(props.card)
+    props.onCardLike(props.card);
   }
 
   function handleDeleteClick() {
-    props.onCardDelete(props.card)
+    props.onCardDelete(props.card);
   }
-
 
   return (
     <li className="element">
@@ -32,8 +30,8 @@ export default function Cards(props) {
       />
       <h3 className="element__title">{props.card.name}</h3>
       {(isOwn) ? (
-        <button type="button" 
-        onClick = {handleDeleteClick} 
+        <button type="button"
+        onClick = {handleDeleteClick}
         className="element__recyclebin"></button>
       ) : (
         <></>
@@ -44,8 +42,8 @@ export default function Cards(props) {
         onClick={handleLikeClick}
         className={
           (isLiked)
-            ? "element__like-button element__like-button_active"
-            : "element__like-button"
+            ? 'element__like-button element__like-button_active'
+            : 'element__like-button'
         }
       ></button>
       <p className="element__likes">{(props.card.likes) ? props.card.likes.length : 0}</p>

@@ -6,6 +6,11 @@
   border-bottom-color: #545454; /* Цвет линии внизу */
   min-height: 74px;
   max-width: 882px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+
 }
 
 @media all and (max-width: 945px) {

@@ -1,24 +1,23 @@
-import React from "react";
-import PopupWithForm from "./PopupWithForm";
-import {CurrentUserContext } from '../contexts/CurrentUserContext';
-
+import React from 'react';
+import PopupWithForm from './PopupWithForm';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function EditProfilePopup(props) {
   const [name, setName] = React.useState('');
-  const [description ,setDescription ] = React.useState('');
+  const [description, setDescription] = React.useState('');
   const currentUser = React.useContext(CurrentUserContext);
 
   React.useEffect(() => {
     setName((currentUser) ? currentUser.name : '');
     setDescription((currentUser) ? currentUser.about : '');
-  }, [currentUser]); 
+  }, [currentUser]);
 
   function handleChangeAuthor(e) {
-    setName(e.target.value)
+    setName(e.target.value);
   }
 
   function handleChangeDescription(e) {
-    setDescription(e.target.value)
+    setDescription(e.target.value);
   }
 
   function handleSubmit(e) {
@@ -28,7 +27,6 @@ export default function EditProfilePopup(props) {
       about: description,
     });
   }
-
 
   return (
     <PopupWithForm
@@ -48,7 +46,7 @@ export default function EditProfilePopup(props) {
           minLength={2}
           maxLength={40}
           onChange={handleChangeAuthor}
-          value={name ? name: ''}
+          value={name || ''}
         />
         <span id="popup_profile__title-error" className="popup__input-error" />
         <input
@@ -61,7 +59,7 @@ export default function EditProfilePopup(props) {
           minLength={2}
           maxLength={200}
           onChange={handleChangeDescription}
-          value={description ? description : ''}
+          value={description || ''}
         />
         <span
           id="popup_profile__subtitle-error"
@@ -71,5 +69,5 @@ export default function EditProfilePopup(props) {
           Сохранить
         </button>
       </PopupWithForm>
-  )
+  );
 }
